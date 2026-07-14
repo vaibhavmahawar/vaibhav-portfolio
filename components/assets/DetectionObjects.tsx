@@ -73,14 +73,22 @@ export function RealisticBird({ className }: { className?: string }) {
         </linearGradient>
       </defs>
 
-      {/* The whole bird gently soars using translate only — universally
-          supported across browsers (unlike scaleY + transform-box on an SVG
-          <g>, which silently renders static on some engines, e.g. Safari/iOS,
-          and was the reason the bird looked frozen on the deployed site). */}
-      <motion.g
-        animate={{ y: [0, -4, 0, 3, 0], x: [0, 2, 0, -2, 0] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      >
+      {/* The whole bird soars using a native SVG SMIL animation. This is
+          intentionally NOT Framer Motion / CSS: on the deployed build those
+          left the bird frozen, whereas SMIL runs in the browser's SVG engine
+          (no JS/hydration) and is unaffected by the global prefers-reduced-motion
+          CSS rule — so the bird reliably moves everywhere. */}
+      <g>
+        <animateTransform
+          attributeName="transform"
+          type="translate"
+          values="0 0; 4 -7; 0 0; -4 5; 0 0"
+          keyTimes="0; 0.25; 0.5; 0.75; 1"
+          dur="3s"
+          repeatCount="indefinite"
+          calcMode="spline"
+          keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
+        />
         {/* Left wing with fingered primary feathers */}
         <path
           d="M50 50
@@ -114,7 +122,7 @@ export function RealisticBird({ className }: { className?: string }) {
         <path d="M50 39.5 L48 35 L52 35 Z" fill="#2b3136" />
         {/* Tail */}
         <path d="M46.5 66 L53.5 66 L50 80 Z" fill="#2b3136" />
-      </motion.g>
+      </g>
     </svg>
   );
 }
