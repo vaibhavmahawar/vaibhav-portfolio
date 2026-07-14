@@ -89,30 +89,55 @@ export function RealisticBird({ className }: { className?: string }) {
           calcMode="spline"
           keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"
         />
-        {/* Left wing with fingered primary feathers */}
-        <path
-          d="M50 50
-             C 42 44 34 41 24 41
-             C 22 40 20 41 21 43
-             C 18 42 16 43 17 45
-             C 14 45 13 46 14 48
-             C 12 48 11 50 13 51
-             C 22 51 34 52 44 54
-             C 47 55 49 54 50 53 Z"
-          fill="url(#det-bird-body)"
-        />
-        {/* Right wing (mirror) */}
-        <path
-          d="M50 50
-             C 58 44 66 41 76 41
-             C 78 40 80 41 79 43
-             C 82 42 84 43 83 45
-             C 86 45 87 46 86 48
-             C 88 48 89 50 87 51
-             C 78 51 66 52 56 54
-             C 53 55 51 54 50 53 Z"
-          fill="url(#det-bird-body)"
-        />
+
+        {/* Left wing — flaps by rotating around the shoulder joint (50,50).
+            SMIL rotate is used (not Framer/CSS) so it runs reliably on Vercel. */}
+        <g>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="-14 50 50; 20 50 50; -14 50 50"
+            dur="0.8s"
+            repeatCount="indefinite"
+            calcMode="spline"
+            keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+          />
+          <path
+            d="M50 50
+               C 42 44 34 41 24 41
+               C 22 40 20 41 21 43
+               C 18 42 16 43 17 45
+               C 14 45 13 46 14 48
+               C 12 48 11 50 13 51
+               C 22 51 34 52 44 54
+               C 47 55 49 54 50 53 Z"
+            fill="url(#det-bird-body)"
+          />
+        </g>
+
+        {/* Right wing (mirror) — flaps in sync, opposite rotation direction */}
+        <g>
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            values="14 50 50; -20 50 50; 14 50 50"
+            dur="0.8s"
+            repeatCount="indefinite"
+            calcMode="spline"
+            keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+          />
+          <path
+            d="M50 50
+               C 58 44 66 41 76 41
+               C 78 40 80 41 79 43
+               C 82 42 84 43 83 45
+               C 86 45 87 46 86 48
+               C 88 48 89 50 87 51
+               C 78 51 66 52 56 54
+               C 53 55 51 54 50 53 Z"
+            fill="url(#det-bird-body)"
+          />
+        </g>
 
         {/* Body */}
         <ellipse cx="50" cy="55" rx="4.5" ry="13" fill="url(#det-bird-body)" />
