@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 /**
  * Renders a real captured photo of the detected object (drone/bird) when one
@@ -22,6 +22,17 @@ export default function DetectionObject({
   fallback: ReactNode;
 }) {
   const [failed, setFailed] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // The image may finish (and fail) loading before React hydrates and attaches
+  // the onError handler — common on fast production/CDN loads (e.g. Vercel).
+  // Re-check completion state on mount so the fallback still renders.
+  useEffect(() => {
+    const img = imgRef.current;
+    if (img && img.complete && img.naturalWidth === 0) {
+      setFailed(true);
+    }
+  }, []);
 
   if (failed) {
     return <>{fallback}</>;
@@ -30,9 +41,9 @@ export default function DetectionObject({
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
+      ref={imgRef}
       src={src}
       alt={alt}
-      loading="lazy"
       onError={() => setFailed(true)}
       className="absolute inset-0 h-full w-full object-contain p-1.5 drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
     />
