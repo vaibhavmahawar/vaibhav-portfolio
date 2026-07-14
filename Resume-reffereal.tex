@@ -1,0 +1,320 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{multicol}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.2in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-6pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+%------------------------------------
+% Custom Commands
+%------------------------------------
+
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1\vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+\vspace{-2pt}\item
+\begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+\textbf{#1} & #2\\
+\textit{\small #3} & \textit{\small #4}\\
+\end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+\item
+\begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+\small#1 & #2\\
+\end{tabular*}\vspace{-7pt}
+}
+% \newcommand{\resumeProjectHeading}[2]{
+%     \item
+%     \parbox[t]{0.50\textwidth}{\raggedright\small #1}\hfill
+%     \parbox[t]{0.46\textwidth}{\raggedleft\footnotesize\itshape #2}\vspace{-7pt}
+% }
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in,label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%------------------------------------
+%%%%% RESUME STARTS HERE
+%------------------------------------
+
+\begin{document}
+
+%------------------------------------
+% Heading
+%------------------------------------
+
+\begin{center}
+\textbf{\Huge \cshape Vaibhav Kumar Mahawar}\\ \vspace{1pt}
+
+\small +91-8209851728 $|$
+\href{mailto:vaibhavmahawar@rocketmail.com}{vaibhavmahawar@rocketmail.com}
+$|$
+\href{https://www.linkedin.com/in/vaibhavkumarmahawar}{linkedin.com/in/vaibhavkumarmahawar}
+$|$
+\href{https://github.com/vaibhavmahawar}{github.com/vaibhavmahawar}
+\\
+Ajmer, Rajasthan, India
+\end{center}
+\vspace{-15pt}
+%------------------------------------
+% Education
+%------------------------------------
+
+\section{Education}
+
+\resumeSubHeadingListStart
+
+\resumeSubheading
+{Dr. B. R. Ambedkar National Institute of Technology Jalandhar}
+{Jalandhar, Punjab}
+{Master of Technology in Machine Intelligence and Automation \hfill CGPA: 8.11/10}
+{Aug. 2024 -- Jun. 2026}
+
+\resumeSubheading
+{Poornima Institute of Engineering and Technology}
+{Jaipur, Rajasthan}
+{Bachelor of Technology in Computer Science and Engineering \hfill \hspace{7pt} CGPA: 8.54/10}
+{Jul. 2019 -- Jun. 2023}
+
+\resumeSubHeadingListEnd
+\vspace{-10pt}
+%------------------------------------
+% Experience
+%------------------------------------
+
+\section{Experience}
+
+\resumeSubHeadingListStart
+
+\resumeSubheading
+{Software Development Intern}
+{Jul. 2022 -- Sep. 2022}
+{Techienest Pvt. Ltd.}
+{Jaipur, Rajasthan}
+
+\vspace{-4pt}
+\resumeItemListStart
+
+\resumeItem{
+Developed a React Native mobile application for 500+ primary students featuring interactive Vedic mathematics exercises, progress tracking, and REST API integration, improving learning accessibility across Android devices.
+}
+
+\resumeItem{
+Collaborated with cross-functional teams to develop, test, and optimize scalable mobile application features while integrating REST APIs and improving application performance and maintainability.
+}
+
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{-13pt}
+%------------------------------------
+% Projects
+%------------------------------------
+
+\section{Projects}
+
+\resumeSubHeadingListStart
+
+\resumeProjectHeading
+{\textbf{Rudra – AI-Powered Software Engineering Platform}
+$|$
+\emph{Node.js, Typescript, Python, Redis,  Neo4j, Docker}}
+{2026}
+\vspace{-15pt}
+\resumeItemListStart
+
+\resumeItem{
+Architected an autonomous multi-agent software engineering platform capable of planning, code generation, repository analysis, debugging, documentation synthesis, and deployment using FastAPI, MCP, and LLM orchestration.
+}
+
+\resumeItem{
+Designed scalable backend services with FastAPI, Redis, and Neo4j while implementing memory-enabled reasoning, tool execution, and intelligent agent collaboration for software engineering workflows.
+}
+
+\resumeItemListEnd
+
+\vspace{-5pt}
+%-------------------------------------------------------------
+
+\resumeProjectHeading
+{\textbf{Career Twin– AI Career Intelligence Platform}
+$|$
+\emph{React, Typescript, AWS Bedrock, LangGraph, Vector Search}}
+{2026}
+\vspace{-15pt}
+\resumeItemListStart
+
+\resumeItem{
+Developed an AI-driven career intelligence platform that analyzes resumes, matches job descriptions, identifies skill gaps, and generates ATS-optimized resumes, cover letters, and interview preparation plans.
+}
+
+\resumeItem{
+Implemented semantic retrieval, Retrieval-Augmented Generation (RAG), vector search, and AWS Bedrock-powered reasoning pipelines to deliver personalized career recommendations through scalable backend services.
+}
+
+\resumeItemListEnd
+
+\vspace{-5pt}
+%-------------------------------------------------------------
+
+\resumeProjectHeading
+{\textbf{AI-Powered Drone Intelligence Platform}
+$|$
+\emph{Python, YOLOv8, OpenCV, LangChain, LLMs, ANFIS, RAG}}
+{2026}
+\vspace{-15pt}
+\resumeItemListStart
+
+\resumeItem{
+Developed an AI-powered drone intelligence platform integrating YOLOv8, OpenCV, and ANFIS for real-time drone detection, threat assessment, and explainable decision support across surveillance scenarios.
+}
+
+\resumeItem{
+Integrated Retrieval-Augmented Generation (RAG) with LLMs to enable natural language querying, surveillance summarization, contextual reasoning, and explainable analysis of detected aerial threats.
+}
+
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{-13pt}
+%------------------------------------
+% Research Experience
+%------------------------------------
+
+\section{Research Experience}
+
+\resumeSubHeadingListStart
+
+\resumeProjectHeading
+{\textbf{Real-Time Drone Detection and Classification System}
+$|$
+\emph{Python, YOLOv8, OpenCV, ANFIS, Fuzzy Logic}}
+{2026}
+\vspace{-13pt}
+\resumeItemListStart
+
+\resumeItem{
+Developed a real-time YOLOv8-based drone detection framework with ANFIS-enhanced classification, achieving over 91\% detection accuracy while reducing bird--drone misclassification by 52\%.
+}
+
+\resumeItemListEnd
+\vspace{-3pt}
+%-----------------------------------------------------
+\resumeProjectHeading
+{\textbf{Generative AI and Agentic Systems Research}
+$|$
+\emph{LLMs, LangChain, LangGraph, MCP, RAG, AI Agents}}
+{Ongoing}
+\vspace{-17pt}
+
+\resumeItemListStart
+
+\resumeItem{
+Exploring autonomous AI agents, Retrieval-Augmented Generation (RAG), Model Context Protocol (MCP), long-context reasoning, and multi-agent orchestration for enterprise-scale AI applications.
+}
+
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{-13pt}
+%------------------------------------
+% Technical Skills
+%------------------------------------
+\section{Technical Skills}
+
+\begin{itemize}[leftmargin=0.15in, label={}]
+\small{\item{
+
+\textbf{Programming Languages:}
+Python, Java, C++, JavaScript, SQL\\
+
+\textbf{AI \& Machine Learning:}
+PyTorch, TensorFlow, Scikit-learn, OpenCV, YOLO, Computer Vision, CNNs, Transformers, Vision Transformers, Transfer Learning, ANFIS, Fuzzy Logic \\
+
+\textbf{Generative AI:}
+OpenAI, Gemini, LangChain, LangGraph, LlamaIndex, Prompt Engineering, RAG, MCP, AI Agents, Multi-Agent Systems, Tool Calling, Embeddings, Vector Search \\
+
+\textbf{Backend Development:}
+FastAPI, REST APIs, Node.js, Express.js \\
+
+
+\textbf{Databases:}
+Neo4j, Redis, PostgreSQL, MongoDB, SQLite, FAISS, Weaviate \\
+
+\textbf{Cloud}
+Azure AI, AWS, Docker, Kubernetes, Git, GitHub, GitHub Actions, Linux \\
+
+\textbf{Data Engineering:}
+Pandas, NumPy, PySpark, ETL Pipelines, Data Processing, Feature Engineering \\
+
+\textbf{Tools:}
+VS Code, Eclipse, Jupyter Notebook, Postman, Linux
+
+}}
+\end{itemize}
+
+\vspace{-13pt}
+%------------------------------------
+% Certifications, Publications & Achievements
+%------------------------------------
+\section{Certifications \& Achievements}
+\begin{itemize}[leftmargin=0.15in, label={}]
+\small{
+\item{
+\textbf{Research Publications}
+Published research papers in international journals and conferences on Computer Vision, Artificial Intelligence, Intelligent Surveillance, Photovoltaic Systems, and Renewable Energy Optimization.
+
+\textbf{Microsoft Certified: Azure AI Fundamentals (AI-900)}
+Certified in Azure AI services, Machine Learning fundamentals, Responsible AI, and AI solution development.
+
+\textbf{GATE Qualified}
+Qualified GATE Computer Science (2024 \& 2026) and GATE Data Science \& Artificial Intelligence (DA 2026).
+}
+\end{itemize}
+
+\end{document}

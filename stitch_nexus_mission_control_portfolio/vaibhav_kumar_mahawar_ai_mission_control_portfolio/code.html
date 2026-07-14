@@ -1,0 +1,896 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>V.K.M MISSION CONTROL | AI &amp; Systems Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "primary-fixed-dim": "#00dce5",
+                "surface-bright": "#393939",
+                "outline-variant": "#3a494a",
+                "tertiary": "#ebffea",
+                "surface-container": "#20201f",
+                "on-tertiary-fixed": "#00210c",
+                "tertiary-container": "#7ef5a0",
+                "surface": "#131313",
+                "on-secondary-container": "#c6ceff",
+                "error-container": "#93000a",
+                "background": "#131313",
+                "on-surface-variant": "#b9caca",
+                "on-surface": "#e5e2e1",
+                "inverse-surface": "#e5e2e1",
+                "primary-container": "#00f5ff",
+                "on-secondary": "#002388",
+                "primary-fixed": "#63f7ff",
+                "surface-dim": "#131313",
+                "on-primary": "#003739",
+                "on-primary-fixed": "#002021",
+                "on-error": "#690005",
+                "surface-container-high": "#2a2a2a",
+                "secondary-container": "#0043eb",
+                "secondary": "#b8c3ff",
+                "on-background": "#e5e2e1",
+                "secondary-fixed": "#dde1ff",
+                "outline": "#849495",
+                "secondary-fixed-dim": "#b8c3ff",
+                "on-tertiary-container": "#007037",
+                "on-primary-container": "#006c71",
+                "inverse-primary": "#00696e",
+                "on-secondary-fixed": "#001356",
+                "on-primary-fixed-variant": "#004f53",
+                "on-error-container": "#ffdad6",
+                "surface-tint": "#00dce5",
+                "surface-container-low": "#1b1b1b",
+                "on-tertiary-fixed-variant": "#005227",
+                "error": "#ffb4ab",
+                "surface-variant": "#353535",
+                "surface-container-highest": "#353535",
+                "on-tertiary": "#003919",
+                "on-secondary-fixed-variant": "#0035be",
+                "surface-container-lowest": "#0e0e0e",
+                "primary": "#e9feff",
+                "tertiary-fixed-dim": "#66dd8b",
+                "tertiary-fixed": "#83fba5",
+                "inverse-on-surface": "#313030"
+              },
+              "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+              },
+              "spacing": {
+                "stack-md": "24px",
+                "container-max": "1440px",
+                "unit": "4px",
+                "stack-sm": "8px",
+                "stack-lg": "48px",
+                "margin": "24px",
+                "gutter": "16px"
+              },
+              "fontFamily": {
+                "body-lg": ["Inter"],
+                "label-caps": ["JetBrains Mono"],
+                "headline-md": ["Space Grotesk"],
+                "technical-sm": ["JetBrains Mono"],
+                "display-lg": ["Space Grotesk"],
+                "body-md": ["Inter"],
+                "headline-lg": ["Space Grotesk"]
+              },
+              "fontSize": {
+                "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                "technical-sm": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        .glass-panel {
+            background: rgba(10, 17, 40, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(112, 128, 144, 0.2);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 20px rgba(0, 220, 229, 0.15);
+        }
+        .terminal-grid {
+            background-image: radial-gradient(rgba(0, 220, 229, 0.1) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .scan-line {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #00dce5, transparent);
+            position: absolute;
+            animation: scan 4s linear infinite;
+        }
+        @keyframes scan {
+            0% { top: 0; opacity: 0; }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+        .node-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body class="font-body-md selection:bg-primary-fixed-dim/30 selection:text-primary-fixed-dim">
+<!-- Fixed Background Shader -->
+<div class="fixed inset-0 z-[-1] pointer-events-none opacity-40">
+<!-- STITCH_SHADER_START:ANIMATION_10 class="absolute inset-0 w-full h-full" -->
+<div class="absolute inset-0 w-full h-full" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_10" style="display:block;width:100%;height:100%" width="1280" height="4411"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_10');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+
+float hash(vec2 p) {
+    p = fract(p * vec2(123.34, 456.21));
+    p += dot(p, p + 45.32);
+    return fract(p.x * p.y);
+}
+
+void main() {
+    vec2 uv = (v_texCoord - 0.5) * (u_resolution / min(u_resolution.x, u_resolution.y));
+    vec2 mouse = (u_mouse / u_resolution - 0.5) * (u_resolution / min(u_resolution.x, u_resolution.y));
+    
+    // Technical Deep Space Grid
+    vec2 grid_uv = fract(uv * 8.0 + u_time * 0.02);
+    float grid = smoothstep(0.005, 0.0, abs(grid_uv.x - 0.5)) + smoothstep(0.005, 0.0, abs(grid_uv.y - 0.5));
+    grid *= 0.08;
+
+    // AI Intelligence Field
+    vec3 color = vec3(0.02, 0.04, 0.08); // Deep Zenith Navy
+    
+    for(float i=0.0; i<25.0; i++) {
+        float h = hash(vec2(i, 789.12));
+        vec2 p = vec2(sin(u_time * 0.08 + h * 6.28), cos(u_time * 0.12 + h * 6.28)) * 0.45;
+        
+        float d = length(uv - p);
+        float m_d = length(uv - mouse);
+        
+        // Synaptic Pulse
+        float glow = 0.0015 / d;
+        glow *= smoothstep(0.5, 0.0, d);
+        
+        // Tactical Interaction
+        glow += 0.0008 / (d + m_d * 1.5);
+        
+        // Primary Cyan/Emerald Blend
+        vec3 node_color = mix(vec3(0.0, 0.96, 1.0), vec3(0.0, 1.0, 0.7), h);
+        color += node_color * glow * (0.6 + 0.4 * sin(u_time * 1.2 + h * 10.0));
+    }
+
+    // Horizontal Scan Line (Radar Sweep feel)
+    float scan = smoothstep(0.1, 0.0, abs(uv.y - sin(u_time * 0.5) * 0.5)) * 0.03;
+    color += vec3(0.0, 0.96, 1.0) * scan;
+    
+    // Vignette for focus
+    color *= 1.1 - length(uv) * 0.6;
+
+    gl_FragColor = vec4(color + grid, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_10 -->
+</div>
+<!-- Navigation Shell -->
+<header class="sticky top-4 mx-auto rounded-full w-[95%] max-w-container z-50 bg-surface-container/60 backdrop-blur-xl border border-outline-variant/20 shadow-[0_0_15px_rgba(0,220,229,0.1)] flex justify-between items-center px-8 py-3">
+<div class="font-headline-md text-headline-md tracking-tighter text-primary-fixed-dim">V.K.M MISSION CONTROL</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-label-caps text-label-caps text-primary-fixed-dim border-b-2 border-primary-fixed-dim pb-1 transition-all active:scale-95" href="#home">Home</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary-fixed-dim transition-colors active:scale-95" href="#about">About</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary-fixed-dim transition-colors active:scale-95" href="#experience">Experience</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary-fixed-dim transition-colors active:scale-95" href="#projects">Projects</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary-fixed-dim transition-colors active:scale-95" href="#research">Research</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary-fixed-dim transition-colors active:scale-95" href="#skills">Skills</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed-dim transition-all">settings</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed-dim transition-all">terminal</button>
+<div class="w-8 h-8 rounded-full border border-primary-fixed-dim/30 overflow-hidden">
+<img alt="System Drone" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLse7xQIUTVI4xnxSwb7km37hGTZFytSS8HrauN8E9DEeAVyXIpMa-0qtQSGgmTjTvDYEOOeX5GUY58_0I7S1Vsxs4DuNO-b09wrMVgraMiR67VC2HiDyNy9pcbS323piEdF0mjeIbVzRx9rGxtbg3bWz9sFS08KJFU9434swvT5FN1Tv7pPKk7PXhS0zy6wg6YNZ784TcXuqfvRINDyBlXZz-cAqSu0ZatcCi_nzpk0B4vetXWQKlqu0vea">
+</div>
+</div>
+</header>
+<main class="max-w-container mx-auto px-margin">
+<!-- Hero Section -->
+<section class="relative min-h-screen flex flex-col justify-center pt-stack-lg" id="home">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-full opacity-20 pointer-events-none">
+<!-- STITCH_THREEJS_START:ANIMATION_9 class="absolute inset-0 w-full h-full" -->
+<div class="absolute inset-0 w-full h-full" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_9" style="width:100%;height:100%"><canvas width="1232" height="2048" style="display: block; width: 616px; height: 1024px;"></canvas></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_9');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  const width = container.clientWidth || window.innerWidth;
+const height = container.clientHeight || window.innerHeight;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+renderer.setSize(width, height);
+renderer.setPixelRatio(window.devicePixelRatio);
+container.appendChild(renderer.domElement);
+
+// Create a futuristic "AI Core" geometry
+const group = new THREE.Group();
+scene.add(group);
+
+const coreGeom = new THREE.IcosahedronGeometry(1, 1);
+const coreMat = new THREE.MeshPhongMaterial({
+    color: 0x00f5ff,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.4,
+    emissive: 0x00f5ff,
+    emissiveIntensity: 0.5
+});
+const core = new THREE.Mesh(coreGeom, coreMat);
+group.add(core);
+
+const outerGeom = new THREE.IcosahedronGeometry(1.5, 0);
+const outerMat = new THREE.MeshPhongMaterial({
+    color: 0x00ffb3,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.1,
+});
+const outer = new THREE.Mesh(outerGeom, outerMat);
+group.add(outer);
+
+// Add particles for "data flow"
+const pointsGeom = new THREE.BufferGeometry();
+const pointsCount = 200;
+const coords = new Float32Array(pointsCount * 3);
+for (let i = 0; i < pointsCount * 3; i++) {
+    coords[i] = (Math.random() - 0.5) * 6;
+}
+pointsGeom.setAttribute('position', new THREE.BufferAttribute(coords, 3));
+const pointsMat = new THREE.PointsMaterial({ color: 0x00f5ff, size: 0.03, transparent: true, opacity: 0.6 });
+const points = new THREE.Points(pointsGeom, pointsMat);
+group.add(points);
+
+const light = new THREE.PointLight(0x00f5ff, 1, 100);
+light.position.set(5, 5, 5);
+scene.add(light);
+scene.add(new THREE.AmbientLight(0x404040));
+
+camera.position.z = 4;
+
+function animate(t) {
+    requestAnimationFrame(animate);
+    group.rotation.y += 0.002;
+    group.rotation.x += 0.001;
+    
+    // Pulsing effect
+    const s = 1 + Math.sin(t * 0.001) * 0.05;
+    core.scale.set(s, s, s);
+    
+    renderer.render(scene, camera);
+}
+
+window.addEventListener('resize', () => {
+    const w = container.clientWidth || window.innerWidth;
+    const h = container.clientHeight || window.innerHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+});
+
+animate(0);
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_9 -->
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<div class="lg:col-span-7 z-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-fixed-dim/10 border border-primary-fixed-dim/30 rounded-full mb-stack-md">
+<span class="w-2 h-2 bg-primary-fixed-dim rounded-full node-pulse"></span>
+<span class="font-label-caps text-[10px] text-primary-fixed-dim">SYSTEM STATUS: OPERATIONAL // V.K.M</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary-fixed-dim mb-stack-md leading-tight">
+                        Engineering Intelligent <br>Systems That <span class="text-on-surface italic">Perceive, Reason, and Act</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-stack-lg">
+                        M.Tech in Machine Intelligence. Architecting high-stakes Multi-Agent systems and Computer Vision frameworks for the next generation of autonomous orchestration.
+                    </p>
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+<div class="glass-panel p-4 border-l-2 border-l-primary-fixed-dim transition-all duration-700 ease-out opacity-100 translate-y-0">
+<div class="font-label-caps text-primary-fixed-dim">AI SYSTEMS</div>
+<div class="font-headline-lg text-headline-lg">12+</div>
+</div>
+<div class="glass-panel p-4 border-l-2 border-l-primary-fixed-dim transition-all duration-700 ease-out opacity-100 translate-y-0">
+<div class="font-label-caps text-primary-fixed-dim">RESEARCH</div>
+<div class="font-headline-lg text-headline-lg">8+</div>
+</div>
+<div class="glass-panel p-4 border-l-2 border-l-primary-fixed-dim transition-all duration-700 ease-out opacity-100 translate-y-0">
+<div class="font-label-caps text-primary-fixed-dim">PAPERS</div>
+<div class="font-headline-lg text-headline-lg">5</div>
+</div>
+<div class="glass-panel p-4 border-l-2 border-l-primary-fixed-dim transition-all duration-700 ease-out opacity-100 translate-y-0">
+<div class="font-label-caps text-primary-fixed-dim">TECH STACK</div>
+<div class="font-headline-lg text-headline-lg">25+</div>
+</div>
+<div class="glass-panel p-4 border-l-2 border-l-primary-fixed-dim transition-all duration-700 ease-out opacity-100 translate-y-0">
+<div class="font-label-caps text-primary-fixed-dim">EXP</div>
+<div class="font-headline-lg text-headline-lg">4+Y</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 relative mt-stack-lg lg:mt-0">
+<div class="aspect-square rounded-xl overflow-hidden glass-panel p-1 relative transition-all duration-700 ease-out opacity-100 translate-y-0">
+<img alt="Cute AI System Assistant" class="w-full h-full object-cover rounded-lg grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9zvR7zvg4qMaC_UCWcWJiW0_um9TTTLqo5KRI7tfRHoUs9_AuoirAioSpF9v4SEtm5DFaJcFm-WCigcOnzgnNj9Hi9pKmKtgycR3PVnzpNV8PcHS8R6eKvT0k71f-aJLntzX1rILA9IWzO2ZWbncJEqqFVrBIa5KEkt45oOTUsC0oWsFLG96YoRTNNuXHcZH7pF5dVyEys0kjevJ1otxYif5XYneBW1f-6b_J6m7FMlJzhCguzfugRRGE372uibEwgGwYFgJwFO22">
+<div class="absolute inset-0 pointer-events-none border border-primary-fixed-dim/20 rounded-lg"></div>
+<div class="scan-line"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-stack-lg" id="about">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<div class="lg:col-span-4">
+<h2 class="font-label-caps text-primary-fixed-dim mb-4 tracking-widest uppercase">// MISSION_PROFILE</h2>
+<h3 class="font-headline-lg text-headline-lg mb-6">Cognitive Engineering Specialist</h3>
+</div>
+<div class="lg:col-span-8 space-y-6">
+<div class="glass-panel p-8 transition-all duration-700 ease-out opacity-100 translate-y-0">
+<p class="font-body-lg text-on-surface mb-6 leading-relaxed">
+                            Currently pursuing M.Tech in Machine Intelligence, my research focus lies at the intersection of Computer Vision and Distributed AI. I specialize in building "Reasoning Engines"—systems that don't just process data but contextualize it to take decisive action.
+                        </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md font-technical-sm text-on-surface-variant" style="text-shadow: none;">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-fixed-dim">memory</span>
+<div class="">
+<span class="block text-primary-fixed-dim font-bold mb-1">MACHINE INTELLIGENCE</span>
+                                    Researching Adaptive Neuro-Fuzzy Inference Systems (ANFIS) and Reinforcement Learning for dynamic environments.
+                                </div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-fixed-dim">visibility</span>
+<div class="">
+<span class="block text-primary-fixed-dim font-bold mb-1">COMPUTER VISION</span>
+                                    Implementing state-of-the-art YOLO architectures and real-time spatial perception for drone telemetry.
+                                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects: Flagship Drone Platform -->
+<section class="py-stack-lg scroll-mt-24" id="projects">
+<h2 class="font-label-caps text-primary-fixed-dim mb-8 text-center tracking-[0.3em] uppercase">DEPLOYED_OPERATIONS</h2>
+<!-- Drone Platform -->
+<div class="glass-panel overflow-hidden mb-gutter group transition-all duration-700 ease-out opacity-100 translate-y-0">
+<div class="grid grid-cols-1 lg:grid-cols-12">
+<div class="lg:col-span-7 bg-surface-container-lowest relative min-h-[400px] overflow-hidden terminal-grid">
+<!-- Simulated Command UI -->
+<div class="absolute inset-0 p-6 flex flex-col justify-between pointer-events-none">
+<div class="flex justify-between items-start">
+<div class="bg-black/60 p-2 border border-primary-fixed-dim/30 font-technical-sm">
+<div class="text-primary-fixed-dim">TARGET_ACQUISITION</div>
+<div class="text-xs">CAM_01 // THERMAL_OVERLAY</div>
+</div>
+<div class="flex gap-2">
+<div class="px-2 py-1 bg-red-500/20 text-red-400 text-[10px] font-bold border border-red-500/40">LIVE</div>
+<div class="px-2 py-1 bg-primary-fixed-dim/20 text-primary-fixed-dim text-[10px] font-bold border border-primary-fixed-dim/40 font-technical-sm">LAT: 28.6139 | LON: 77.2090</div>
+</div>
+</div>
+<!-- Simulated Bounding Boxes -->
+<div class="absolute top-1/3 left-1/4 w-32 h-40 border-2 border-primary-fixed-dim/60 flex flex-col items-start p-1">
+<span class="bg-primary-fixed-dim text-black text-[8px] font-bold px-1 mb-auto">ID_042 // PERSON (0.98)</span>
+<div class="w-full h-px bg-primary-fixed-dim/40 mb-1"></div>
+<div class="text-[8px] text-primary-fixed-dim">DIST: 14.2m</div>
+</div>
+<div class="absolute bottom-1/4 right-1/3 w-24 h-24 border-2 border-tertiary-fixed-dim/60 flex flex-col items-start p-1">
+<span class="bg-tertiary-fixed-dim text-black text-[8px] font-bold px-1 mb-auto">ID_043 // OBSTACLE</span>
+<div class="text-[8px] text-tertiary-fixed-dim">REASON: ANFIS_AVOID</div>
+</div>
+<div class="flex justify-between items-end">
+<div class="w-48 h-20 border border-outline-variant/30 bg-black/40 p-2 overflow-hidden">
+<div class="flex gap-1 items-end h-full">
+<div class="w-2 h-1/2 bg-primary-fixed-dim/40"></div>
+<div class="w-2 h-3/4 bg-primary-fixed-dim/60"></div>
+<div class="w-2 h-1/3 bg-primary-fixed-dim/20"></div>
+<div class="w-2 h-full bg-primary-fixed-dim"></div>
+<div class="w-2 h-1/2 bg-primary-fixed-dim/40"></div>
+</div>
+</div>
+<div class="font-technical-sm text-right">
+<div class="text-primary-fixed-dim">FPS: 60.2</div>
+<div class="text-xs">YOLOv8_ENGINE: ACTIVE</div>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 p-stack-md flex flex-col justify-center">
+<div class="text-primary-fixed-dim font-technical-sm mb-2">PROJECT_01 // AIR_INTEL</div>
+<h4 class="font-headline-lg text-headline-lg mb-4">Drone Intelligence Platform</h4>
+<p class="text-on-surface-variant font-body-md mb-6 leading-relaxed">
+                            A mission-critical surveillance stack combining YOLO-based target detection with ANFIS reasoning for autonomous navigation. Capable of multi-object tracking and real-time threat assessment in high-clutter environments.
+                        </p>
+<div class="flex flex-wrap gap-2 mb-stack-md">
+<span class="px-3 py-1 bg-surface-container-high border border-outline-variant/30 text-xs font-technical-sm rounded">PyTorch</span>
+<span class="px-3 py-1 bg-surface-container-high border border-outline-variant/30 text-xs font-technical-sm rounded">C++</span>
+<span class="px-3 py-1 bg-surface-container-high border border-outline-variant/30 text-xs font-technical-sm rounded">ROS2</span>
+</div>
+<a class="inline-flex items-center gap-2 font-label-caps text-primary-fixed-dim hover:gap-4 transition-all" href="#">
+                            VIEW_SPECIFICATIONS <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Rudra & Career Twin Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Rudra -->
+<div class="glass-panel p-stack-md group hover:border-primary-fixed-dim/40 transition-colors transition-all duration-700 ease-out opacity-100 translate-y-0">
+<div class="w-full aspect-video bg-surface-container-lowest mb-stack-md relative overflow-hidden border border-outline-variant/20">
+<!-- High-Tech Architecture Diagram -->
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="relative w-4/5 h-4/5">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 px-4 py-2 border border-primary-fixed-dim bg-primary-fixed-dim/10 font-technical-sm text-xs">GLOBAL_PLANNER</div>
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-px h-10 bg-primary-fixed-dim"></div>
+<div class="absolute top-[45%] left-1/2 -translate-x-1/2 px-4 py-2 border border-white/40 bg-white/5 font-technical-sm text-xs">ROUTER_AGENT</div>
+<div class="absolute bottom-0 left-0 px-3 py-2 border border-tertiary-fixed-dim bg-tertiary-fixed-dim/10 font-technical-sm text-[10px]">ANALYSIS_NODE</div>
+<div class="absolute bottom-0 left-1/2 -translate-x-1/2 px-3 py-2 border border-tertiary-fixed-dim bg-tertiary-fixed-dim/10 font-technical-sm text-[10px]">SEARCH_NODE</div>
+<div class="absolute bottom-0 right-0 px-3 py-2 border border-tertiary-fixed-dim bg-tertiary-fixed-dim/10 font-technical-sm text-[10px]">CODE_NODE</div>
+<svg class="absolute inset-0 pointer-events-none opacity-40" viewBox="0 0 200 150">
+<path d="M100 50 L100 70 M100 95 L40 130 M100 95 L100 130 M100 95 L160 130" fill="none" stroke="#00dce5" stroke-dasharray="2 2" stroke-width="0.5"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="text-primary-fixed-dim font-technical-sm mb-2">PROJECT_02 // AGENT_ORCHESTRATOR</div>
+<h4 class="font-headline-md text-headline-md mb-2">Rudra Multi-Agent System</h4>
+<p class="text-on-surface-variant font-body-md text-sm mb-4">
+                        Distributed multi-agent architecture featuring a specialized "Router" that decomposes complex tasks into sub-routines for domain-specific LLM agents.
+                    </p>
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-surface-container-high text-[10px] font-technical-sm rounded">LangGraph</span>
+<span class="px-2 py-0.5 bg-surface-container-high text-[10px] font-technical-sm rounded">GPT-4o</span>
+</div>
+</div>
+<!-- Career Twin -->
+<div class="glass-panel p-stack-md group hover:border-primary-fixed-dim/40 transition-colors transition-all duration-700 ease-out opacity-100 translate-y-0">
+<div class="w-full aspect-video bg-surface-container-lowest mb-stack-md relative overflow-hidden border border-outline-variant/20">
+<div class="absolute inset-0 p-6 flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-1 bg-primary-fixed-dim/40"></div>
+<div class="font-technical-sm text-[10px]">RAG_PIPELINE_FLOW</div>
+</div>
+<div class="space-y-2">
+<div class="p-2 border border-outline-variant/30 bg-surface/40 text-[10px] font-technical-sm">PDF_PARSER -&gt; CHUNKING_V3</div>
+<div class="p-2 border border-primary-fixed-dim/30 bg-primary-fixed-dim/5 text-[10px] font-technical-sm">VECTOR_DB_UPSERT (PINECONE)</div>
+<div class="p-2 border border-outline-variant/30 bg-surface/40 text-[10px] font-technical-sm">SEMANTIC_RETRIEVAL_QUERY</div>
+<div class="p-2 border border-tertiary-fixed-dim/30 bg-tertiary-fixed-dim/5 text-[10px] font-technical-sm">CONTEXTUAL_GEN_OUTPUT</div>
+</div>
+</div>
+</div>
+<div class="text-primary-fixed-dim font-technical-sm mb-2">PROJECT_03 // CAREER_INTELLIGENCE</div>
+<h4 class="font-headline-md text-headline-md mb-2">Career Twin RAG</h4>
+<p class="text-on-surface-variant font-body-md text-sm mb-4">
+                        A personalized career assistant using Retrieval-Augmented Generation to synthesize individual professional history into high-fidelity advice modules.
+                    </p>
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-surface-container-high text-[10px] font-technical-sm rounded">OpenAI</span>
+<span class="px-2 py-0.5 bg-surface-container-high text-[10px] font-technical-sm rounded">Pinecone</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Experience Section -->
+<section class="py-stack-lg border-t border-outline-variant/10" id="experience">
+<h2 class="font-label-caps text-primary-fixed-dim mb-12 tracking-widest uppercase text-center">COMMUNICATIONS_LOG // HISTORY</h2>
+<div class="max-w-4xl mx-auto space-y-gutter relative">
+<!-- Timeline Line -->
+<div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary-fixed-dim/40 via-outline-variant/20 to-transparent"></div>
+<!-- Exp 1 -->
+<div class="relative pl-8 md:pl-0 md:w-1/2 md:pr-12 group">
+<div class="absolute left-[-4px] md:left-auto md:right-[-4px] top-4 w-2 h-2 bg-primary-fixed-dim rounded-full shadow-[0_0_8px_#00dce5]"></div>
+<div class="glass-panel p-6 hover:translate-x-2 md:hover:-translate-x-2 transition-transform cursor-pointer transition-all duration-700 ease-out opacity-100 translate-y-0">
+<div class="text-primary-fixed-dim font-technical-sm mb-1">2023 - PRESENT</div>
+<h4 class="font-headline-md text-headline-md">Senior AI Intern</h4>
+<div class="font-label-caps text-xs text-on-surface-variant mb-3">TECH_LEAD_SOLUTIONS</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                            Leading development of CV-based automation pipelines. Optimized model inference speed by 40% using TensorRT and custom quantization strategies.
+                        </p>
+</div>
+</div>
+<!-- Exp 2 -->
+<div class="relative pl-8 md:pl-0 md:w-1/2 md:ml-auto md:pl-12 group">
+<div class="absolute left-[-4px] top-4 w-2 h-2 bg-primary-fixed-dim/40 rounded-full"></div>
+<div class="glass-panel p-6 hover:translate-x-2 transition-transform cursor-pointer transition-all duration-700 ease-out opacity-100 translate-y-0">
+<div class="text-primary-fixed-dim font-technical-sm mb-1">2022 - 2023</div>
+<h4 class="font-headline-md text-headline-md">Software Engineer</h4>
+<div class="font-label-caps text-xs text-on-surface-variant mb-3">INFOSYS_LIMITED</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                            Full-stack development for enterprise-scale logistics management system. Managed AWS microservices and orchestrated Docker deployments.
+                        </p>
+</div>
+</div>
+<!-- Exp 3 -->
+<div class="relative pl-8 md:pl-0 md:w-1/2 md:pr-12 group">
+<div class="absolute left-[-4px] md:left-auto md:right-[-4px] top-4 w-2 h-2 bg-primary-fixed-dim/40 rounded-full"></div>
+<div class="glass-panel p-6 hover:translate-x-2 md:hover:-translate-x-2 transition-transform cursor-pointer transition-all duration-700 ease-out opacity-100 translate-y-0">
+<div class="text-primary-fixed-dim font-technical-sm mb-1">2021</div>
+<h4 class="font-headline-md text-headline-md">Research Intern</h4>
+<div class="font-label-caps text-xs text-on-surface-variant mb-3">IIT_DELHI_CV_LAB</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                            Assisted in training GANs for low-light image enhancement. Developed data preprocessing pipelines for large-scale video datasets.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Research & Skills -->
+<section class="py-stack-lg border-t border-outline-variant/10" id="research">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-stack-lg">
+<!-- Research -->
+<div>
+<h2 class="font-label-caps text-primary-fixed-dim mb-8 tracking-widest uppercase">// PUBLISHED_DATA</h2>
+<div class="space-y-gutter">
+<div class="glass-panel p-6 relative overflow-hidden transition-all duration-700 ease-out opacity-100 translate-y-0">
+<div class="absolute top-0 right-0 p-2 opacity-10">
+<span class="material-symbols-outlined text-6xl">description</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-2">Adaptive ANFIS Architectures for Real-time Drone Navigation</h4>
+<p class="text-sm text-on-surface-variant mb-4">IEEE International Conference on Robotics and Automation (ICRA)</p>
+<a class="text-primary-fixed-dim font-technical-sm flex items-center gap-2 hover:gap-3 transition-all" href="#">
+                                READ_ABSTRACT <span class="material-symbols-outlined">launch</span>
+</a>
+</div>
+<div class="glass-panel p-6 relative overflow-hidden opacity-80 transition-all duration-700 ease-out opacity-100 translate-y-0">
+<h4 class="font-headline-md text-headline-md mb-2">Multi-Agent Federated Learning in Latency-Constrained Environments</h4>
+<p class="text-sm text-on-surface-variant mb-4">NeurIPS Workshop: Decentralized Systems</p>
+<a class="text-primary-fixed-dim font-technical-sm flex items-center gap-2 hover:gap-3 transition-all" href="#">
+                                READ_ABSTRACT <span class="material-symbols-outlined">launch</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Skills -->
+<div id="skills">
+<h2 class="font-label-caps text-primary-fixed-dim mb-8 tracking-widest uppercase">// TECH_CAPABILITIES</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="glass-panel p-5 border-l-2 border-l-primary-fixed-dim transition-all duration-700 ease-out opacity-100 translate-y-0">
+<div class="font-label-caps text-[10px] text-primary-fixed-dim mb-3">AI &amp; MACHINE LEARNING</div>
+<ul class="space-y-2 font-technical-sm text-xs text-on-surface-variant">
+<li class="flex justify-between"><span class="">PyTorch / TensorFlow</span> <span class="text-primary-fixed-dim">98%</span></li>
+<li class="flex justify-between"><span class="">Reinforcement Learning</span> <span class="text-primary-fixed-dim">85%</span></li>
+<li class="flex justify-between"><span class="">LLM Orchestration</span> <span class="text-primary-fixed-dim">92%</span></li>
+<li class="flex justify-between"><span class="">OpenCV / YOLO</span> <span class="text-primary-fixed-dim">95%</span></li>
+</ul>
+</div>
+<div class="glass-panel p-5 border-l-2 border-l-tertiary-fixed-dim transition-all duration-700 ease-out opacity-100 translate-y-0">
+<div class="font-label-caps text-[10px] text-tertiary-fixed-dim mb-3">BACKEND &amp; CLOUD</div>
+<ul class="space-y-2 font-technical-sm text-xs text-on-surface-variant">
+<li class="flex justify-between"><span class="">Python / FastAPI</span> <span class="text-tertiary-fixed-dim">95%</span></li>
+<li class="flex justify-between"><span class="">Docker / K8s</span> <span class="text-tertiary-fixed-dim">80%</span></li>
+<li class="flex justify-between"><span class="">AWS / Azure</span> <span class="text-tertiary-fixed-dim">88%</span></li>
+<li class="flex justify-between"><span class="">C++ System Design</span> <span class="text-tertiary-fixed-dim">75%</span></li>
+</ul>
+</div>
+</div>
+<!-- Architecture Visual -->
+<div class="mt-gutter glass-panel p-4 h-32 overflow-hidden relative transition-all duration-700 ease-out opacity-100 translate-y-0">
+<!-- STITCH_SHADER_START:ANIMATION_10 class="absolute inset-0 w-full h-full opacity-30" -->
+<div class="absolute inset-0 w-full h-full opacity-30" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_10" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_10');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+
+float hash(vec2 p) {
+    p = fract(p * vec2(123.34, 456.21));
+    p += dot(p, p + 45.32);
+    return fract(p.x * p.y);
+}
+
+void main() {
+    vec2 uv = (v_texCoord - 0.5) * (u_resolution / min(u_resolution.x, u_resolution.y));
+    vec2 mouse = (u_mouse / u_resolution - 0.5) * (u_resolution / min(u_resolution.x, u_resolution.y));
+    
+    // Technical Deep Space Grid
+    vec2 grid_uv = fract(uv * 8.0 + u_time * 0.02);
+    float grid = smoothstep(0.005, 0.0, abs(grid_uv.x - 0.5)) + smoothstep(0.005, 0.0, abs(grid_uv.y - 0.5));
+    grid *= 0.08;
+
+    // AI Intelligence Field
+    vec3 color = vec3(0.02, 0.04, 0.08); // Deep Zenith Navy
+    
+    for(float i=0.0; i<25.0; i++) {
+        float h = hash(vec2(i, 789.12));
+        vec2 p = vec2(sin(u_time * 0.08 + h * 6.28), cos(u_time * 0.12 + h * 6.28)) * 0.45;
+        
+        float d = length(uv - p);
+        float m_d = length(uv - mouse);
+        
+        // Synaptic Pulse
+        float glow = 0.0015 / d;
+        glow *= smoothstep(0.5, 0.0, d);
+        
+        // Tactical Interaction
+        glow += 0.0008 / (d + m_d * 1.5);
+        
+        // Primary Cyan/Emerald Blend
+        vec3 node_color = mix(vec3(0.0, 0.96, 1.0), vec3(0.0, 1.0, 0.7), h);
+        color += node_color * glow * (0.6 + 0.4 * sin(u_time * 1.2 + h * 10.0));
+    }
+
+    // Horizontal Scan Line (Radar Sweep feel)
+    float scan = smoothstep(0.1, 0.0, abs(uv.y - sin(u_time * 0.5) * 0.5)) * 0.03;
+    color += vec3(0.0, 0.96, 1.0) * scan;
+    
+    // Vignette for focus
+    color *= 1.1 - length(uv) * 0.6;
+
+    gl_FragColor = vec4(color + grid, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_10 -->
+<div class="relative z-10 font-technical-sm text-[10px] uppercase tracking-tighter text-primary-fixed-dim">
+                            SYSTEM_PIPELINE_LOAD: OPTIMAL <br>
+                            LATENCY: 14MS <br>
+                            UPLINK: ENCRYPTED
+                         </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact -->
+<section class="py-stack-lg border-t border-outline-variant/10 mb-stack-lg" id="contact">
+<div class="glass-panel p-stack-lg relative overflow-hidden transition-all duration-700 ease-out opacity-100 translate-y-0">
+<div class="absolute inset-0 z-0 pointer-events-none opacity-10">
+<!-- World Connectivity Background -->
+<div class="w-full h-full" data-alt="A futuristic map of the world with glowing blue lines of connectivity and data transfer between major global tech hubs, rendered in a dark, high-contrast mission control style with cyan accents." data-location="San Francisco" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAFs4a0JGajp2xUaaQ-PEJ4iDIwGtBEL6XEzzjDqgSA9zFpYJvsDTSqMqtY0aR9FwpIqS-6NKwEi_1OTMr0fJbcB1gSRgvCghAObaNIzA2sxGUc5u0JVuyrfST4HvjskyU8ydB4SUbLkfOXBApaljEO771s_3oaaTA9h18OU8KqBo-1olSiuBex5JWEJV2ziVUvCY8wdhvPuzRU5sVVykf2vWC50kNuXxB77uE-eKqPsaZsCojPVXXKjV8b7tmDecy8Iu7u-3MqNGF_')"></div>
+</div>
+<div class="relative z-10 text-center max-w-2xl mx-auto">
+<h2 class="font-display-lg text-headline-lg text-primary-fixed-dim mb-4">Initialize Communication</h2>
+<p class="font-body-lg text-on-surface-variant mb-stack-lg">
+                        Seeking strategic collaborations on frontier AI systems and autonomous infrastructures. System status is ready for incoming transmissions.
+                    </p>
+<div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+<button class="bg-primary-container text-on-primary-container px-8 py-4 font-label-caps flex items-center gap-2 hover:bg-primary-fixed transition-all rounded-sm">
+<span class="material-symbols-outlined">send</span>
+                            INITIATE_HANDSHAKE
+                        </button>
+<div class="flex gap-4">
+<a class="w-12 h-12 glass-panel flex items-center justify-center hover:text-primary-fixed-dim transition-colors group transition-all duration-700 ease-out opacity-100 translate-y-0" href="#">
+<span class="material-symbols-outlined">terminal</span>
+</a>
+<a class="w-12 h-12 glass-panel flex items-center justify-center hover:text-primary-fixed-dim transition-colors group transition-all duration-700 ease-out opacity-100 translate-y-0" href="#">
+<span class="material-symbols-outlined">code</span>
+</a>
+<a class="w-12 h-12 glass-panel flex items-center justify-center hover:text-primary-fixed-dim transition-colors group transition-all duration-700 ease-out opacity-100 translate-y-0" href="#">
+<span class="material-symbols-outlined">person</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-outline-variant/10 bg-surface-container-lowest flex flex-col md:flex-row justify-between items-center px-margin py-stack-sm gap-4">
+<div class="font-technical-sm text-tertiary-fixed-dim">© 2024 VKM MISSION CONTROL // SYSTEM STATUS: OPTIMAL // ENCRYPTION: AES-256-GCM</div>
+<div class="flex gap-6">
+<a class="font-technical-sm text-on-surface-variant/60 hover:text-primary-fixed-dim cursor-pointer transition-opacity duration-200" href="#">Terminal</a>
+<a class="font-technical-sm text-on-surface-variant/60 hover:text-primary-fixed-dim cursor-pointer transition-opacity duration-200" href="#">System Logs</a>
+<a class="font-technical-sm text-on-surface-variant/60 hover:text-primary-fixed-dim cursor-pointer transition-opacity duration-200" href="#">Source Code</a>
+</div>
+</footer>
+<script>
+        // Micro-interactions and scroll effects
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.glass-panel').forEach(el => {
+                el.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700', 'ease-out');
+                observer.observe(el);
+            });
+        });
+
+        // Simple typing effect for technical elements
+        const technicalElements = document.querySelectorAll('.font-technical-sm');
+        technicalElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                el.style.textShadow = '0 0 8px rgba(0,220,229,0.5)';
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.textShadow = 'none';
+            });
+        });
+    </script>
+
+
+</body></html>
