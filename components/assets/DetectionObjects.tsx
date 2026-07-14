@@ -73,11 +73,13 @@ export function RealisticBird({ className }: { className?: string }) {
         </linearGradient>
       </defs>
 
-      {/* Soaring raptor — wings gently flap */}
+      {/* The whole bird gently soars using translate only — universally
+          supported across browsers (unlike scaleY + transform-box on an SVG
+          <g>, which silently renders static on some engines, e.g. Safari/iOS,
+          and was the reason the bird looked frozen on the deployed site). */}
       <motion.g
-        style={{ transformBox: "fill-box", transformOrigin: "center" }}
-        animate={{ scaleY: [1, 0.9, 1] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ y: [0, -4, 0, 3, 0], x: [0, 2, 0, -2, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       >
         {/* Left wing with fingered primary feathers */}
         <path
@@ -103,16 +105,16 @@ export function RealisticBird({ className }: { className?: string }) {
              C 53 55 51 54 50 53 Z"
           fill="url(#det-bird-body)"
         />
-      </motion.g>
 
-      {/* Body */}
-      <ellipse cx="50" cy="55" rx="4.5" ry="13" fill="url(#det-bird-body)" />
-      {/* Head */}
-      <circle cx="50" cy="43" r="3.6" fill="#3a4046" />
-      {/* Beak */}
-      <path d="M50 39.5 L48 35 L52 35 Z" fill="#2b3136" />
-      {/* Tail */}
-      <path d="M46.5 66 L53.5 66 L50 80 Z" fill="#2b3136" />
+        {/* Body */}
+        <ellipse cx="50" cy="55" rx="4.5" ry="13" fill="url(#det-bird-body)" />
+        {/* Head */}
+        <circle cx="50" cy="43" r="3.6" fill="#3a4046" />
+        {/* Beak */}
+        <path d="M50 39.5 L48 35 L52 35 Z" fill="#2b3136" />
+        {/* Tail */}
+        <path d="M46.5 66 L53.5 66 L50 80 Z" fill="#2b3136" />
+      </motion.g>
     </svg>
   );
 }
