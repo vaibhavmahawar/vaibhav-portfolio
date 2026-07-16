@@ -18,18 +18,20 @@ const channels = [
   {
     icon: FileDown,
     label: "AI/ML Engineer",
-    value: "Download PDF",
+    // value: "Download PDF",
+    value: "View PDF",
     href: "/VKM_resume_AIML.pdf",
     external: true,
-    download: true,
+    // download: true,
   },
   {
     icon: FileDown,
     label: "Backend/SDE",
-    value: "Download PDF",
+    // value: "Download PDF",
+    value: "View PDF",
     href: "/VKM_resume_SDE.pdf",
     external: true,
-    download: true,
+    // download: true,
   },
 ];
 
@@ -73,7 +75,7 @@ export default function Contact() {
                   href={c.href}
                   target={c.external ? "_blank" : undefined}
                   rel={c.external ? "noopener noreferrer" : undefined}
-                  download={"download" in c && c.download ? "" : undefined}
+                  // download={"download" in c && c.download ? "" : undefined}
                   className="glass-panel glass-panel-hover group flex flex-col items-center gap-2 rounded-lg p-4"
                 >
                   <c.icon className="h-5 w-5 text-on-surface-variant transition-colors group-hover:text-primary-fixed-dim" />
