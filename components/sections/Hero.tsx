@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Download, Github, Linkedin } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Github, Linkedin } from "lucide-react";
 import { profile, stats } from "@/lib/data";
 import MagneticButton from "@/components/ui/MagneticButton";
 import TypingText from "@/components/ui/TypingText";
@@ -71,9 +71,6 @@ export default function Hero() {
           >
             <MagneticButton href="#projects" variant="primary">
               View Projects <ArrowRight className="h-4 w-4" />
-            </MagneticButton>
-            <MagneticButton href={profile.resumeUrl} variant="ghost" download external>
-              <Download className="h-4 w-4" /> Resume
             </MagneticButton>
             <MagneticButton href={profile.github} variant="ghost" external ariaLabel="GitHub">
               <Github className="h-4 w-4" /> GitHub

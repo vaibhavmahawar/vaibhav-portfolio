@@ -15,7 +15,22 @@ const channels = [
     href: profile.linkedin,
     external: true,
   },
-  { icon: FileDown, label: "Resume", value: "Download PDF", href: profile.resumeUrl, external: true },
+  {
+    icon: FileDown,
+    label: "AI/ML Engineer",
+    value: "Download PDF",
+    href: "/VKM_resume_AIML.pdf",
+    external: true,
+    download: true,
+  },
+  {
+    icon: FileDown,
+    label: "Backend/SDE",
+    value: "Download PDF",
+    href: "/VKM_resume_SDE.pdf",
+    external: true,
+    download: true,
+  },
 ];
 
 export default function Contact() {
@@ -51,13 +66,14 @@ export default function Contact() {
               </MagneticButton>
             </div>
 
-            <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-5">
               {channels.map((c) => (
                 <a
                   key={c.label}
                   href={c.href}
                   target={c.external ? "_blank" : undefined}
                   rel={c.external ? "noopener noreferrer" : undefined}
+                  download={"download" in c && c.download ? "" : undefined}
                   className="glass-panel glass-panel-hover group flex flex-col items-center gap-2 rounded-lg p-4"
                 >
                   <c.icon className="h-5 w-5 text-on-surface-variant transition-colors group-hover:text-primary-fixed-dim" />

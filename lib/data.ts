@@ -72,7 +72,7 @@ export const education = [
   {
     school: "Dr. B. R. Ambedkar National Institute of Technology, Jalandhar",
     degree: "M.Tech — Machine Intelligence & Automation",
-    score: "CGPA 8.11 / 10",
+    score: "CGPA 8.48 / 10",
     period: "Aug 2024 — Jun 2026",
     location: "Jalandhar, Punjab",
   },
